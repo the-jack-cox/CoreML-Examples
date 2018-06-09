@@ -16,7 +16,7 @@ The models are
 2. Custom model built using CreateML on macOS 10.14 which was trained on [CalTech 256](http://www.vision.caltech.edu/Image_Datasets/Caltech256/) dataset which contains about 30,000 images. The resulting model, using transfer learning and quantization is about 4Mb
 
 ## Income Prediction
-This code uses census information regarding incomes from almost 49,000 adults in 1994. Information about the dataset can be found at [https://archive.ics.uci.edu/ml/datasets/Adult](https://archive.ics.uci.edu/ml/datasets/Adult)
+This code uses census information regarding incomes from almost 49,000 adults in 1994 to predict a person's income level based on a small set of demographic data. Information about the dataset can be found at [https://archive.ics.uci.edu/ml/datasets/Adult](https://archive.ics.uci.edu/ml/datasets/Adult)
 
 ## Key Files
 
@@ -29,6 +29,7 @@ This code uses census information regarding incomes from almost 49,000 adults in
 2. macOS 10.14 or higher to rebuild the models
 2. Xcode 10 beta 1 or higher
 3. iOS 13 beta 1 or higher
+4. iPhone or iPad with iOS 14 beta 1 or higher. This code will not run on a simulator due to the use of ARKit.
 
 
 
