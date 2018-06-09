@@ -85,15 +85,16 @@ class MLTableDataViewController: UIViewController, UIPickerViewDelegate, UIPicke
             // the property names are dependent up on the structure of the model
             let level = prediction.income_level
             // non-neural network models don't provide a probability
-            let prob = prediction.income_levelProbability
+            let _ = prediction.income_levelProbability
             
-            self.predictionLabel.text = String(format: "\(level) : %0.2f%%", prob)
+            self.predictionLabel.text = "Est. Income: \(level)"
         } catch {
             print("Error: infering income level")
         }
         
     }
-
+    // MARK: Managing all the form stuff
+    
     fileprivate func resetPickerValues() {
         
         // reset all picker values
