@@ -25,6 +25,10 @@ class ARMLVisionViewController: UIViewController, ARSKViewDelegate, ARSessionDel
     @IBOutlet weak var inceptionClassifierLabel: UILabel!
     @IBOutlet weak var messageLabel: UILabel!
     
+    private var customModelClassificationRequest: VNCoreMLRequest?
+    private var inceptionModelClassificationRequest: VNCoreMLRequest?
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -39,6 +43,9 @@ class ARMLVisionViewController: UIViewController, ARSKViewDelegate, ARSessionDel
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        
+        customModelClassificationRequest = self.createClassificationRequestion(classificationModel: ImageClassifier256().model, label: self.customClassifierLabel)
+        inceptionModelClassificationRequest = self.createClassificationRequestion(classificationModel: Inceptionv3().model, label: self.inceptionClassifierLabel)
         
         // Create a session configuration
         let configuration = ARWorldTrackingConfiguration()
@@ -78,46 +85,25 @@ class ARMLVisionViewController: UIViewController, ARSKViewDelegate, ARSessionDel
     
     // MARK: Image Classification code
     
-    
-    private lazy var customModelClassificationRequest: VNCoreMLRequest = {
+    private func createClassificationRequestion(classificationModel:MLModel, label:UILabel) -> VNCoreMLRequest {
         do {
             // Instantiate the model from its generated Swift class.
-            let model = try VNCoreMLModel(for: ImageClassifier().model)
+            let model = try VNCoreMLModel(for: classificationModel)
             let request = VNCoreMLRequest(model: model, completionHandler: { [weak self] request, error in
-                self?.processClassifications(for: request, error: error, label: self?.customClassifierLabel)
+                self?.processClassifications(for: request, error: error, label: label)
             })
             
             // Crop input images to square area at center, matching the way the ML model was trained.
             request.imageCropAndScaleOption = .centerCrop
             
             // Use CPU for Vision processing to ensure that there are adequate GPU resources for rendering.
-            request.usesCPUOnly = true
+            request.usesCPUOnly = !SettingsManager.sharedInstance.useGPUForImageClassification
             
             return request
         } catch {
             fatalError("Failed to load Vision ML model: \(error)")
         }
-    }()
-    
-    private lazy var inceptionModelClassificationRequest: VNCoreMLRequest = {
-        do {
-            // Instantiate the model from its generated Swift class.
-            let model = try VNCoreMLModel(for: Inceptionv3().model)
-            let request = VNCoreMLRequest(model: model, completionHandler: { [weak self] request, error in
-                self?.processClassifications(for: request, error: error, label: self?.inceptionClassifierLabel)
-            })
-            
-            // Crop input images to square area at center, matching the way the ML model was trained.
-            request.imageCropAndScaleOption = .centerCrop
-            
-            // Use CPU for Vision processing to ensure that there are adequate GPU resources for rendering.
-            request.usesCPUOnly = true
-            
-            return request
-        } catch {
-            fatalError("Failed to load Vision ML model: \(error)")
-        }
-    }()
+    }
     
     private func classifyImageInCurrentBuffer() {
         // Most computer vision tasks are not rotation agnostic so it is important to pass in the orientation of the image with respect to device.
@@ -130,6 +116,10 @@ class ARMLVisionViewController: UIViewController, ARSKViewDelegate, ARSessionDel
             print("Error: The current image buffer is empty")
             return
         }
+        guard let customReq = self.customModelClassificationRequest, let inceptionRequest = self.inceptionModelClassificationRequest else {
+            print("requests not initialized")
+            return
+        }
         // create a request to classify the buffer
         let requestHandler = VNImageRequestHandler(cvPixelBuffer: currentBuffer, orientation: orientation)
         visionQueue.async {
@@ -137,7 +127,14 @@ class ARMLVisionViewController: UIViewController, ARSKViewDelegate, ARSessionDel
                 // Release the pixel buffer when done, allowing the next buffer to be processed.
                 defer { self.currentBuffer = nil }
                 // use two models to classify the image
-                try requestHandler.perform([self.customModelClassificationRequest, self.inceptionModelClassificationRequest])
+                var requests:[VNRequest] = []
+                if SettingsManager.sharedInstance.doCustomClassification {
+                    requests.append(customReq)
+                }
+                if SettingsManager.sharedInstance.doInceptionClassification {
+                    requests.append(inceptionRequest)
+                }
+                try requestHandler.perform(requests)
             } catch {
                 print("Error: Vision request failed with error \"\(error)\"")
             }

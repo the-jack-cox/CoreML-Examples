@@ -17,6 +17,8 @@
 		FA22354E20CC041600A28577 /* ImageClassifier.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = FA22354D20CC041600A28577 /* ImageClassifier.mlmodel */; };
 		FA22355020CC045300A28577 /* Inceptionv3.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = FA22354F20CC045300A28577 /* Inceptionv3.mlmodel */; };
 		FA22355220CC0AB800A28577 /* SelfClearingLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA22355120CC0AB800A28577 /* SelfClearingLabel.swift */; };
+		FA22355520CC190400A28577 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA22355420CC190400A28577 /* SettingsViewController.swift */; };
+		FA22355720CC198500A28577 /* SettingsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA22355620CC198500A28577 /* SettingsManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -32,6 +34,8 @@
 		FA22354D20CC041600A28577 /* ImageClassifier.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = ImageClassifier.mlmodel; sourceTree = "<group>"; };
 		FA22354F20CC045300A28577 /* Inceptionv3.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = Inceptionv3.mlmodel; sourceTree = "<group>"; };
 		FA22355120CC0AB800A28577 /* SelfClearingLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelfClearingLabel.swift; sourceTree = "<group>"; };
+		FA22355420CC190400A28577 /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
+		FA22355620CC198500A28577 /* SettingsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -66,9 +70,10 @@
 			children = (
 				FA22354A20CC03CA00A28577 /* Models */,
 				FA22353620CC006F00A28577 /* AppDelegate.swift */,
-				FA22353820CC006F00A28577 /* ARMLVisionViewController.swift */,
-				FA22355120CC0AB800A28577 /* SelfClearingLabel.swift */,
+				FA22355320CC18E000A28577 /* Image Classification */,
 				FA22353A20CC006F00A28577 /* MLTableDataViewController.swift */,
+				FA22355420CC190400A28577 /* SettingsViewController.swift */,
+				FA22355620CC198500A28577 /* SettingsManager.swift */,
 				FA22353C20CC006F00A28577 /* Main.storyboard */,
 				FA22353F20CC007300A28577 /* Assets.xcassets */,
 				FA22354120CC007300A28577 /* LaunchScreen.storyboard */,
@@ -85,6 +90,15 @@
 				FA22354F20CC045300A28577 /* Inceptionv3.mlmodel */,
 			);
 			path = Models;
+			sourceTree = "<group>";
+		};
+		FA22355320CC18E000A28577 /* Image Classification */ = {
+			isa = PBXGroup;
+			children = (
+				FA22353820CC006F00A28577 /* ARMLVisionViewController.swift */,
+				FA22355120CC0AB800A28577 /* SelfClearingLabel.swift */,
+			);
+			path = "Image Classification";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -165,6 +179,8 @@
 				FA22355220CC0AB800A28577 /* SelfClearingLabel.swift in Sources */,
 				FA22354C20CC040C00A28577 /* ImageClassifier256.mlmodel in Sources */,
 				FA22354E20CC041600A28577 /* ImageClassifier.mlmodel in Sources */,
+				FA22355520CC190400A28577 /* SettingsViewController.swift in Sources */,
+				FA22355720CC198500A28577 /* SettingsManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
