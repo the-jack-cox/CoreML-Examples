@@ -1,4 +1,4 @@
-#  Core ML Examples
+#  CoreML Examples
 
 This project is a simple project that uses Core ML for two different classifications:
 
