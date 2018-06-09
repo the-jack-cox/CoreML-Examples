@@ -20,7 +20,7 @@ This code uses census information regarding incomes from almost 49,000 adults in
 
 ## Key Files
 
-- MLCore Examples.xcodeproj - The Xcode project for the runtime.
+- CoreML Examples.xcodeproj - The Xcode project for the runtime.
 - AdultIncomePlayground.playground - An Xcode 10 playground to build the adult income classification model. This playground includes the dataset required to train the model.
 
 ## Requirements
