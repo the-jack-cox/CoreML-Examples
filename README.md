@@ -22,6 +22,7 @@ This code uses census information regarding incomes from almost 49,000 adults in
 
 - CoreML Examples.xcodeproj - The Xcode project for the runtime.
 - AdultIncomePlayground.playground - An Xcode 10 playground to build the adult income classification model. This playground includes the dataset required to train the model.
+- ImageRecogPlaygroud.playground - An Xcode 10 playground to train an image recognition model. You must download the images used by this playground from [CalTech 256](http://www.vision.caltech.edu/Image_Datasets/Caltech256/)
 
 ## Requirements
 
