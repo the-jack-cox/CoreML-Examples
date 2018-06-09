@@ -40,6 +40,7 @@
 		FA22355620CC198500A28577 /* SettingsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsManager.swift; sourceTree = "<group>"; };
 		FA22355A20CC269900A28577 /* AdultIncomeData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdultIncomeData.swift; sourceTree = "<group>"; };
 		FA22356220CC338A00A28577 /* AdultIncome.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = AdultIncome.mlmodel; sourceTree = "<group>"; };
+		FA22356520CC5AF700A28577 /* AdultIncomePlayground.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = AdultIncomePlayground.playground; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,6 +57,7 @@
 		FA22352A20CC006F00A28577 = {
 			isa = PBXGroup;
 			children = (
+				FA22356520CC5AF700A28577 /* AdultIncomePlayground.playground */,
 				FA22353520CC006F00A28577 /* MLCore Examples */,
 				FA22353420CC006F00A28577 /* Products */,
 			);
