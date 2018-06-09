@@ -19,6 +19,8 @@
 		FA22355220CC0AB800A28577 /* SelfClearingLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA22355120CC0AB800A28577 /* SelfClearingLabel.swift */; };
 		FA22355520CC190400A28577 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA22355420CC190400A28577 /* SettingsViewController.swift */; };
 		FA22355720CC198500A28577 /* SettingsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA22355620CC198500A28577 /* SettingsManager.swift */; };
+		FA22355B20CC269900A28577 /* AdultIncomeData.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA22355A20CC269900A28577 /* AdultIncomeData.swift */; };
+		FA22356320CC338A00A28577 /* AdultIncome.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = FA22356220CC338A00A28577 /* AdultIncome.mlmodel */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -36,6 +38,8 @@
 		FA22355120CC0AB800A28577 /* SelfClearingLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelfClearingLabel.swift; sourceTree = "<group>"; };
 		FA22355420CC190400A28577 /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		FA22355620CC198500A28577 /* SettingsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsManager.swift; sourceTree = "<group>"; };
+		FA22355A20CC269900A28577 /* AdultIncomeData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdultIncomeData.swift; sourceTree = "<group>"; };
+		FA22356220CC338A00A28577 /* AdultIncome.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = AdultIncome.mlmodel; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -71,7 +75,7 @@
 				FA22354A20CC03CA00A28577 /* Models */,
 				FA22353620CC006F00A28577 /* AppDelegate.swift */,
 				FA22355320CC18E000A28577 /* Image Classification */,
-				FA22353A20CC006F00A28577 /* MLTableDataViewController.swift */,
+				FA22356420CC4C0E00A28577 /* Table Data */,
 				FA22355420CC190400A28577 /* SettingsViewController.swift */,
 				FA22355620CC198500A28577 /* SettingsManager.swift */,
 				FA22353C20CC006F00A28577 /* Main.storyboard */,
@@ -88,6 +92,7 @@
 				FA22354D20CC041600A28577 /* ImageClassifier.mlmodel */,
 				FA22354B20CC040C00A28577 /* ImageClassifier256.mlmodel */,
 				FA22354F20CC045300A28577 /* Inceptionv3.mlmodel */,
+				FA22356220CC338A00A28577 /* AdultIncome.mlmodel */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -99,6 +104,15 @@
 				FA22355120CC0AB800A28577 /* SelfClearingLabel.swift */,
 			);
 			path = "Image Classification";
+			sourceTree = "<group>";
+		};
+		FA22356420CC4C0E00A28577 /* Table Data */ = {
+			isa = PBXGroup;
+			children = (
+				FA22353A20CC006F00A28577 /* MLTableDataViewController.swift */,
+				FA22355A20CC269900A28577 /* AdultIncomeData.swift */,
+			);
+			path = "Table Data";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -174,11 +188,13 @@
 			files = (
 				FA22353B20CC006F00A28577 /* MLTableDataViewController.swift in Sources */,
 				FA22355020CC045300A28577 /* Inceptionv3.mlmodel in Sources */,
+				FA22355B20CC269900A28577 /* AdultIncomeData.swift in Sources */,
 				FA22353720CC006F00A28577 /* AppDelegate.swift in Sources */,
 				FA22353920CC006F00A28577 /* ARMLVisionViewController.swift in Sources */,
 				FA22355220CC0AB800A28577 /* SelfClearingLabel.swift in Sources */,
 				FA22354C20CC040C00A28577 /* ImageClassifier256.mlmodel in Sources */,
 				FA22354E20CC041600A28577 /* ImageClassifier.mlmodel in Sources */,
+				FA22356320CC338A00A28577 /* AdultIncome.mlmodel in Sources */,
 				FA22355520CC190400A28577 /* SettingsViewController.swift in Sources */,
 				FA22355720CC198500A28577 /* SettingsManager.swift in Sources */,
 			);
