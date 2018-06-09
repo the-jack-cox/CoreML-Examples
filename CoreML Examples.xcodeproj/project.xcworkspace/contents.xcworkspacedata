@@ -2,6 +2,6 @@
 <Workspace
    version = "1.0">
    <FileRef
-      location = "self:MLCore Examples.xcodeproj">
+      location = "self:/Users/jcox/Development/MLCore Examples/CoreML Examples.xcodeproj">
    </FileRef>
 </Workspace>

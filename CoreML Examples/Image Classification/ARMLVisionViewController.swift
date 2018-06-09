@@ -44,6 +44,7 @@ class ARMLVisionViewController: UIViewController, ARSKViewDelegate, ARSessionDel
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
+        // create the classifier requests based on new settings
         customModelClassificationRequest = self.createClassificationRequestion(classificationModel: ImageClassifier256().model, label: self.customClassifierLabel)
         inceptionModelClassificationRequest = self.createClassificationRequestion(classificationModel: Inceptionv3().model, label: self.inceptionClassifierLabel)
         
@@ -58,11 +59,18 @@ class ARMLVisionViewController: UIViewController, ARSKViewDelegate, ARSessionDel
         super.viewWillDisappear(animated)
         
         // Pause the view's session
+        // TODO: This doesn't seem to pause didly squat
         sceneView.session.pause()
     }
     
     // MARK: ARSessionDelegate
     
+    
+    /// ARSessionDelegate method called on every frame. This app uses this to capture the image and try to classify it
+    ///
+    /// - Parameters:
+    ///   - session: The ARSession reporting an image
+    ///   - frame: The frame that the AR scene sees
     func session(_ session: ARSession, didUpdate frame: ARFrame) {
         // Do not enqueue other buffers for processing while another Vision task is still running.
         // The camera stream has only a finite amount of buffers available; holding too many buffers for analysis would starve the camera.
@@ -76,15 +84,28 @@ class ARMLVisionViewController: UIViewController, ARSKViewDelegate, ARSessionDel
         classifyImageInCurrentBuffer()
     }
     
+    /// Called when the camera changes state
+    ///
+    /// - Parameters:
+    ///   - session: The ARKit session
+    ///   - camera: The current camera
     func session(_ session: ARSession, cameraDidChangeTrackingState camera: ARCamera) {
 
         DispatchQueue.main.async {
+            // show if the camera is not in a tracking state
             self.messageLabel.text = camera.trackingState.presentationString
         }
     }
     
     // MARK: Image Classification code
     
+    /// Create a classification request for a specific model that reports to a specific label. These are called whent he view appears
+    /// so that the requests are refreshed with the current settings
+    ///
+    /// - Parameters:
+    ///   - classificationModel: The image classification model to utilize
+    ///   - label: The UILabel to use for output
+    /// - Returns: A VNCoreMLRequest
     private func createClassificationRequestion(classificationModel:MLModel, label:UILabel) -> VNCoreMLRequest {
         do {
             // Instantiate the model from its generated Swift class.
