@@ -30,7 +30,11 @@ print(metrics)
 // save the model in the local desktop
 // TODO: change the path to where you want it, unless your username is jcox
 var outputURL = URL(fileURLWithPath: "/Users/jcox/Desktop/AdultIncome.mlmodel")
-var modelMetadata = MLModelMetadata(author: "Jack Cox", shortDescription: "Classifier from UCI Adult Income dataset https://archive.ics.uci.edu/ml/datasets/Adult", license: nil, version: "1.0", additional: nil)
+var modelMetadata = MLModelMetadata(author: "Jack Cox",
+                                    shortDescription: "Classifier from UCI Adult Income dataset https://archive.ics.uci.edu/ml/datasets/Adult",
+                                    license: nil,
+                                    version: "1.0",
+                                    additional: nil)
 try predictor.write(to: outputURL, metadata: modelMetadata)
 
 // Do a test evaluation

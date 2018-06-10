@@ -25,8 +25,13 @@ class ARMLVisionViewController: UIViewController, ARSKViewDelegate, ARSessionDel
     @IBOutlet weak var inceptionClassifierLabel: UILabel!
     @IBOutlet weak var messageLabel: UILabel!
     
+    // the request passed to the vision framework to classify images
     private var customModelClassificationRequest: VNCoreMLRequest?
     private var inceptionModelClassificationRequest: VNCoreMLRequest?
+    
+    // the models to use for the classification
+    private lazy var customClassifierModel = ImageClassifier256().model
+    private lazy var inceptionClassiferModel = Inceptionv3().model
     
     
     override func viewDidLoad() {
@@ -45,8 +50,8 @@ class ARMLVisionViewController: UIViewController, ARSKViewDelegate, ARSessionDel
         super.viewWillAppear(animated)
         
         // create the classifier requests based on new settings
-        customModelClassificationRequest = self.createClassificationRequestion(classificationModel: ImageClassifier256().model, label: self.customClassifierLabel)
-        inceptionModelClassificationRequest = self.createClassificationRequestion(classificationModel: Inceptionv3().model, label: self.inceptionClassifierLabel)
+        customModelClassificationRequest = self.createClassificationRequestion(classificationModel: customClassifierModel, label: self.customClassifierLabel)
+        inceptionModelClassificationRequest = self.createClassificationRequestion(classificationModel: inceptionClassiferModel, label: self.inceptionClassifierLabel)
         
         // Create a session configuration
         let configuration = ARWorldTrackingConfiguration()
@@ -75,7 +80,6 @@ class ARMLVisionViewController: UIViewController, ARSKViewDelegate, ARSessionDel
         // Do not enqueue other buffers for processing while another Vision task is still running.
         // The camera stream has only a finite amount of buffers available; holding too many buffers for analysis would starve the camera.
         guard currentBuffer == nil, case .normal = frame.camera.trackingState else {
-
             return
         }
         
