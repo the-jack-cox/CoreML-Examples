@@ -81,7 +81,7 @@ class MLTableDataViewController: UIViewController, UIPickerViewDelegate, UIPicke
                                                   capital_loss: self.adultData.capitalLoss,
                                                   hours_per_week: self.adultData.hoursPerWeek,
                                                   native_country: self.adultData.nativeCountry)
-            
+
             // the property names are dependent up on the structure of the model
             let level = prediction.income_level
             // non-neural network models don't provide a probability

@@ -218,16 +218,16 @@ I used ARKit in this proof-of-concept because it was the quickest solution to gr
 
 The ```processClassifications``` method gets called after each image classification by each model.
 
-```
-        // Show a label for the highest-confidence result (but only above a minimum confidence threshold).
-        if let bestResult = classifications.first(where: { result in result.confidence > 0.5 }),
-            let clazz = bestResult.identifier.split(separator: ",").first {
-            let confidence = bestResult.confidence
-            message = String(format: "\(clazz) : %.2f", confidence * 100) + "% confidence"
-            DispatchQueue.main.async {
-                label.text = message
-            }
-        }
+```swift
+// Show a label for the highest-confidence result (but only above a minimum confidence threshold).
+if let bestResult = classifications.first(where: { result in result.confidence > 0.5 }),
+    let clazz = bestResult.identifier.split(separator: ",").first {
+    let confidence = bestResult.confidence
+    message = String(format: "\(clazz) : %.2f", confidence * 100) + "% confidence"
+    DispatchQueue.main.async {
+         label.text = message
+    }
+}
 ```
 The classification results don't come back on the main thread. So updating the UI must be dispatched to it.  In this proof-of-concept, I'm only displaying the best result that is above 50% confidence.
 
@@ -238,6 +238,44 @@ In the same project the code to classify tabular data is in the ```MLTableDataVi
 
 I created a helper class ```AdultIncomeData``` to hold the input values and the allowed values for the text fields.  
 
+All of the models used in the app are included in the Xcode project.  
+![Model List](https://github.com/jack-cox-captech/CoreML-Examples/raw/master/images/ProjectModelsScreenshot.png)
+
+It is possible to load models from external sources so that they are not bundled in the app or so that you can update the model without having to redistribute new versions of the app. See [this blog](https://blog.zedge.net/developers-blog/hotswapping-machine-learning-models-in-coreml-for-iphone) for information on hot swapping models.
+
+When bundled with the app, Xcode provides a nice view into the inputs and outputs of the model.
+![Model Metadata](https://github.com/jack-cox-captech/CoreML-Examples/raw/master/images/AdultIncomeModelMetadataScreenshot.png)
+
+This metadata can be helpful to see what the input and output values need to be when you're calling it for a prediction, as shown below.
+
+```swift
+let prediction = try model.prediction(age: self.adultData.age,
+                                      work_class: self.adultData.workClass,
+                                      education: self.adultData.education,
+                                      marital_status: self.adultData.maritalStatus,
+                                      occupation: self.adultData.occupation,
+                                      relationship: self.adultData.relationship,
+                                      race: self.adultData.race,
+                                      sex: self.adultData.sex,
+                                      capital_gain: self.adultData.capitalGain,
+                                      capital_loss: self.adultData.capitalLoss,
+                                      hours_per_week: self.adultData.hoursPerWeek,
+                                      native_country: self.adultData.nativeCountry)
+
+// the property names are dependent up on the structure of the model
+let level = prediction.income_level
+// non-neural network models don't provide a probability
+let _ = prediction.income_levelProbability
+
+```
+
+The ```prediction``` method of the model helpfully provides placeholders for all of the parameters you need to make a prediction.  In this case, I'm pulling those values from the ```AdultIncomeData`` object.  
+
+The output of the ```prediction``` method is an output object that includes the predicted output and a probability. In the case of the non-neural network models, the probability is always 0.
+
+## Conclusion
+
+CoreML 2 provides some very powerful optimizations for producing models that don't blow up your app size. While, not yet a production ready data science tool, in my opinion, CreateML should be studied as a possible way to produce the models for your iOS apps.  
 
 
 
